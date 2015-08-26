@@ -327,6 +327,7 @@ void compute_consensus() {
 
 
 void compute_errors() {
+	DBG("J1=");
 	compute_consensus();
 
 	// J2(t) : Error to Consensus
@@ -353,6 +354,8 @@ void compute_errors() {
 	fappend("data/stats/J2_msg.txt", fmt("%u %f\n", t, J2));
 	fappend("data/stats/J1.txt", fmt("%f %f\n", rt, J1));
 	fappend("data/stats/J2.txt", fmt("%f %f\n", rt, J2));
+
+	DBG("J1=" << J1);
 }
 
 
@@ -427,7 +430,6 @@ bool tic(size_t ms) {
 	struct timeval tv;
 	gettimeofday(&tv, 0);
 	float dt = (tv.tv_sec-ts.tv_sec)*1000 + 0.001*(tv.tv_usec-ts.tv_usec);
-	DBG(dt);
 	if(dt > ms) {
 		ts = tv;
 		return true;

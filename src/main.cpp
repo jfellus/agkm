@@ -245,7 +245,7 @@ public:
 		mu = S;
 		for(int k=0; k<K; k++)	mu.row_sdiv(k,w[k]);
 
-		if(tic(1000)) DBG("Node" << id << " : " << oldmu.l2(mu));
+//		if(tic(1000)) DBG("Node" << id << " : " << oldmu.l2(mu));
 
 		//dump_codebook();
 	}

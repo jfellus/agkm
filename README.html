@@ -1,0 +1,31 @@
+<h1>GOSSIP BASED DECENTRALIZED MULTIMEDIA INDEXING</h1>
+
+<h2>Compiling</h2>
+
+<ol>
+<li><b>cmake .</b></li>
+<li><b>make</b></li>
+</ol>
+
+
+<h3>System configuration</h3>
+
+If you plan to use Shared Matrices functionalities, first check that your kernel allows large enough shared memory segments :
+<br><b>ipcs -l</b>
+
+If needed, increase allowed limits by :
+<ol><li>Appending the following lines to your <i>/etc/sysctl.conf</i>
+<pre>
+###############################
+# RETIN SHARED MEMORY
+# more info : http://pic.dhe.ibm.com/infocenter/soliddb/v6r5/index.jsp?topic=/com.ibm.swg.im.soliddb.accel.doc/doc/sma.parameters.modifying.overview.html
+
+# Max nb of shm segments
+kernel.shmmni=4096 
+# Max size of a shm segment 
+kernel.shmmax=3000000000
+# Max total shm size 
+kernel.shmall=4000000000
+</pre>
+</li><li>typing <b>sysctl -p</b> to register these changes
+</ol>

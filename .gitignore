@@ -1,0 +1,12 @@
+CMakeFiles/*
+CMakeCache.txt
+Makefile
+gossip_pca
+lib/*
+data/*
+plots/*
+results/*
+config.properties
+z/*
+*.cmake
+agkm

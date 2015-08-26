@@ -383,7 +383,7 @@ void compute_errors() {
 
 	DBG("J1=" << J1);
 	DBG("dump");
-	for(int i=0; i<5; i++) node[0].dump_codebook();
+	for(int i=0; i<5; i++) node[i].dump_codebook();
 	dump_consensus();
 	DBG("ok");
 }

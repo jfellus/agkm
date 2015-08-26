@@ -452,13 +452,14 @@ void simulate_sync() {
 
 
 
-
+int TICTIC = 60000;
 void simulate() {
 	gettimeofday(&ts, 0);
 	for(t=0; t<T_MAX; t++) {
 		int i = gossip_choose_sender();
 		node[i].event();
-		if(tic(60000)) {
+		if(tic(TICTIC)) {
+			FILE* f = fopen("TICTIC", "r"); if(f) {fscanf(f, "%u", &TICTIC); fclose(f);}
 			DBG(t);
 			compute_errors();
 		}

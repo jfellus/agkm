@@ -365,13 +365,15 @@ void compute_errors() {
 //
 //	DBG("J2="<<J2);
 
+	int nbof = 50000;
+	int step = n/nbof;
 	// J1(t) : MQE of consensus
 	float J1 = 0;
-	for(int i=0; i<n; i++) {
-		double* x = X.get_row(i);
+	for(int i=0; i<nbof; i++) {
+		double* x = X.get_row(i*step);
 		J1 += consensus.nearest_neighbor_distance(x);
 	}
-	J1 /= n;
+	J1 /= nbof;
 
 
 	fappend("data/stats/J1_msg.txt", fmt("%u %f\n", t, J1));

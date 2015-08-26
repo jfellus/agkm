@@ -426,7 +426,7 @@ bool tic(size_t ms) {
 	static struct timeval ts;
 	struct timeval tv;
 	gettimeofday(&tv, 0);
-	float dt = (tv.tv_sec-ts.tv_sec)*1000.0 + 0.001*(tv.tv_usec-ts.tv_usec);
+	float dt = (tv.tv_sec-ts.tv_sec)*0.001 + 1000*(tv.tv_usec-ts.tv_usec);
 	if(dt > ms) {
 		ts = tv;
 		return true;

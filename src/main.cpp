@@ -352,18 +352,18 @@ void compute_errors() {
 	DBG("J1=");
 	compute_consensus();
 
-	// J2(t) : Error to Consensus
-	float J2 = 0;
-	for(int i=0; i<N; i++) {
-		for(int k=0; k<K; k++) {
-		//	if(sum_w[k]!=0)
-				J2 += sum_w[k] *
-						vector_l2p2_double(consensus.get_row(k), node[i].mu.get_row(k), D);
-		}
-	}
-	J2 /= N*K;
-
-	DBG("J2="<<J2);
+//	// J2(t) : Error to Consensus
+//	float J2 = 0;
+//	for(int i=0; i<N; i++) {
+//		for(int k=0; k<K; k++) {
+//		//	if(sum_w[k]!=0)
+//				J2 += sum_w[k] *
+//						vector_l2p2_double(consensus.get_row(k), node[i].mu.get_row(k), D);
+//		}
+//	}
+//	J2 /= N*K;
+//
+//	DBG("J2="<<J2);
 
 	// J1(t) : MQE of consensus
 	float J1 = 0;
@@ -375,9 +375,9 @@ void compute_errors() {
 
 
 	fappend("data/stats/J1_msg.txt", fmt("%u %f\n", t, J1));
-	fappend("data/stats/J2_msg.txt", fmt("%u %f\n", t, J2));
+//	fappend("data/stats/J2_msg.txt", fmt("%u %f\n", t, J2));
 	fappend("data/stats/J1.txt", fmt("%f %f\n", rt, J1));
-	fappend("data/stats/J2.txt", fmt("%f %f\n", rt, J2));
+//	fappend("data/stats/J2.txt", fmt("%f %f\n", rt, J2));
 
 	DBG("J1=" << J1);
 }

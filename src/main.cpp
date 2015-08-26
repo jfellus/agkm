@@ -18,6 +18,22 @@
 using namespace std;
 
 
+#include <time.h>
+#include <unistd.h>
+#include <sys/time.h>
+static struct timeval ts;
+bool tic(size_t ms) {
+	struct timeval tv;
+	gettimeofday(&tv, 0);
+	float dt = (tv.tv_sec-ts.tv_sec)*1000 + 0.001*(tv.tv_usec-ts.tv_usec);
+	if(dt > ms) {
+		ts = tv;
+		return true;
+	}
+	return false;
+}
+
+
 
 void gossip(int sender);
 
@@ -229,7 +245,7 @@ public:
 		mu = S;
 		for(int k=0; k<K; k++)	mu.row_sdiv(k,w[k]);
 
-		DBG("Node" << id << " : " << oldmu.l2(mu));
+		if(tic(1000)) DBG("Node" << id << " : " << oldmu.l2(mu));
 
 		//dump_codebook();
 	}
@@ -430,20 +446,6 @@ void simulate_sync() {
 }
 
 
-#include <time.h>
-#include <unistd.h>
-#include <sys/time.h>
-static struct timeval ts;
-bool tic(size_t ms) {
-	struct timeval tv;
-	gettimeofday(&tv, 0);
-	float dt = (tv.tv_sec-ts.tv_sec)*1000 + 0.001*(tv.tv_usec-ts.tv_usec);
-	if(dt > ms) {
-		ts = tv;
-		return true;
-	}
-	return false;
-}
 
 
 void simulate() {

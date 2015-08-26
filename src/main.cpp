@@ -341,6 +341,8 @@ void compute_errors() {
 	}
 	J2 /= N*K;
 
+	DBG("J2="<<J2);
+
 	// J1(t) : MQE of consensus
 	float J1 = 0;
 	for(int i=0; i<n; i++) {
@@ -443,10 +445,9 @@ void simulate() {
 	for(t=0; t<T_MAX; t++) {
 		int i = gossip_choose_sender();
 		node[i].event();
-		if(tic(1000)) {
-			compute_errors();
-		}
+		if(tic(1000)) DBG(t);
 	}
+	compute_errors();
 }
 
 

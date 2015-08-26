@@ -419,11 +419,29 @@ void simulate_sync() {
 }
 
 
+#include <time.h>
+#include <unistd.h>
+#include <sys/time.h>
+bool tic(size_t ms) {
+	static struct timeval ts;
+	struct timeval tv;
+	gettimeofday(&tv, 0);
+	float dt = (tv.tv_sec-ts.tv_sec)*1000.0 + 0.001*(tv.tv_usec-ts.tv_usec);
+	if(dt > ms) {
+		ts = tv;
+		return true;
+	}
+	return false;
+}
+
+
 void simulate() {
 	for(t=0; t<T_MAX; t++) {
 		int i = gossip_choose_sender();
 		node[i].event();
-		DBG(t);
+		if(tic(1000)) {
+			compute_errors();
+		}
 	}
 }
 

@@ -112,6 +112,8 @@ public:
 		this->X.create_ref(X.get_row(first),D,n);
 
 		mu.create(D,K);
+		oldmu.create(D,K);
+
 		S.create(D,K);
 		w.create(K,1);
 		oldS.create(D,K);
@@ -221,9 +223,13 @@ public:
 
 	///////////////////
 
+	Matrix oldmu;
 	void update_mu() {
+		oldmu = mu;
 		mu = S;
 		for(int k=0; k<K; k++)	mu.row_sdiv(k,w[k]);
+
+		DBG("Node" << id << " : " << oldmu.l2(mu));
 
 		//dump_codebook();
 	}

@@ -139,16 +139,16 @@ public:
 		if(m>=M) {
 			m=0;
 			local_partition();
-			nextEvtTime = rt + rand_exp(rate_partition);
+//			nextEvtTime = rt + rand_exp(rate_partition);
 
-			dump_msg_between_partitions();
+//			dump_msg_between_partitions();
 		}
 		else {
 			m++;
 			gossip(id);
-			nextEvtTime = rt + rand_exp(rate_com);
+//			nextEvtTime = rt + rand_exp(rate_com);
 
-			msg_between_partitions++;
+//			msg_between_partitions++;
 		}
 	}
 
@@ -180,8 +180,8 @@ public:
 
 		float d1 = newS.l2(oldS);
 		float d2 = newW.l2(oldW);
-		fappend("data/stats/delta_partitioning.txt", fmt("%f %f\n", rt, d1+d2));
-		fappend("data/stats/REC_before_partitioning.txt", fmt("%f %f\n", rt, consensus.l2(mu)));
+//		fappend("data/stats/delta_partitioning.txt", fmt("%f %f\n", rt, d1+d2));
+//		fappend("data/stats/REC_before_partitioning.txt", fmt("%f %f\n", rt, consensus.l2(mu)));
 		if(d1>0.001 || d2 > 0.01){
 			S += newS;
 			w += newW;
@@ -199,7 +199,7 @@ public:
 	// 2) GOSSIP CODEBOOK UPDATES
 
 	int send(Node& node) {
-		nb_evt_send++;
+//		nb_evt_send++;
 	//	fappend(fmt("data/stats/evt/nb_evts_send.txt"), fmt("%f %u\n", rt, id));
 
 		w /= 2; 	S /= 2;
@@ -211,7 +211,7 @@ public:
 	void receive(Matrix& S2, Matrix& w2) {
 		w += w2; S += S2;
 
-		nb_evt_receive++;
+//		nb_evt_receive++;
 	//	fappend("data/stats/evt/nb_evts_receive.txt", fmt("%f %u\n", rt, id));
 		update_mu();
 	}
@@ -419,6 +419,15 @@ void simulate_sync() {
 }
 
 
+void simulate() {
+	for(t=0; t<T_MAX; t++) {
+		int i = gossip_choose_sender();
+		node[i].event();
+		DBG(t);
+	}
+}
+
+
 
 
 
@@ -453,7 +462,7 @@ int main(int argc, char **argv) {
 
 	////////////////////////
 
-	simulate_async();
+	simulate();
 
 	//////////////////////
 

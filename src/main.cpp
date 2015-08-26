@@ -453,7 +453,10 @@ void simulate() {
 	for(t=0; t<T_MAX; t++) {
 		int i = gossip_choose_sender();
 		node[i].event();
-		if(tic(1000)) DBG(t);
+		if(tic(1000)) {
+			DBG(t);
+			compute_errors();
+		}
 	}
 	compute_errors();
 }

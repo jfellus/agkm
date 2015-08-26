@@ -382,6 +382,9 @@ void compute_errors() {
 //	fappend("data/stats/J2.txt", fmt("%f %f\n", rt, J2));
 
 	DBG("J1=" << J1);
+	DBG("dump");
+	for(int i=0; i<5; i++) node[0].dump_codebook();
+	DBG("ok");
 }
 
 
